@@ -5,14 +5,18 @@ import sys
 from pathlib import Path
 from . import Context, ContextError, EnkelError, __version__, compile_sentence
 from .lexicon import description
+from .english import looks_like_enkel, translate_english
 
 
 def main(argv=None):
-    parser = argparse.ArgumentParser(description="Compile Enkel Core 0.1 to explicitly scoped English.")
-    parser.add_argument("sentence", nargs="?", help="one quoted Enkel sentence; stdin if omitted")
+    parser = argparse.ArgumentParser(description="Translate English to Enkel, or compile Enkel to scoped English.")
+    parser.add_argument("sentence", nargs="?", help="one quoted English or Enkel sentence; stdin if omitted")
+    parser.add_argument("--from", dest="input_language", choices=("auto", "english", "enkel"), default="auto", help="input language; auto recognizes Enkel clause prefixes, otherwise English")
     parser.add_argument("--file", type=Path, help="UTF-8 file: one sentence per nonblank, non-comment line")
     parser.add_argument("--context", type=Path, help="JSON entity declarations and pronoun bindings")
-    parser.add_argument("--format", choices=("english", "logic", "json", "normalized"), default="english")
+    parser.add_argument("--format", choices=("enkel", "english", "logic", "json", "normalized"), help="default: Enkel for English input, English for Enkel input")
+    parser.add_argument("--scope", choices=("surface", "object-wide"), help="resolve English quantifier scope explicitly")
+    parser.add_argument("--tense", choices=("past", "present", "future"), help="resolve English tense homographs such as 'I read'")
     parser.add_argument("--lexicon", action="store_true", help="print the pinned vocabulary and paradigms")
     parser.add_argument("--version", action="version", version="Enkel " + __version__)
     args = parser.parse_args(argv)
@@ -34,7 +38,15 @@ def main(argv=None):
         results = []
         for line, source in sources:
             try:
-                results.append(compile_sentence(source, context))
+                language = args.input_language
+                if language == "auto":
+                    language = "enkel" if looks_like_enkel(source) else "english"
+                if language == "english":
+                    results.append(translate_english(source, context, scope=args.scope, tense=args.tense))
+                else:
+                    if args.scope or args.tense:
+                        raise EnkelError("--scope and --tense select English readings; Enkel already records those choices.")
+                    results.append({**compile_sentence(source, context), "input_language": "enkel"})
             except EnkelError as error:
                 if line is not None:
                     print(f"{args.file}:{line}:", file=sys.stderr)
@@ -42,7 +54,11 @@ def main(argv=None):
         if args.format == "json":
             print(json.dumps(results if args.file else results[0], indent=2, sort_keys=True, ensure_ascii=True))
         else:
-            print("\n".join(result[args.format] for result in results))
+            outputs = []
+            for result in results:
+                form = args.format or ("enkel" if result["input_language"] == "english" else "english")
+                outputs.append(result["normalized" if form == "enkel" else form])
+            print("\n".join(outputs))
         return 0
     except (EnkelError, ContextError, OSError, ValueError, RecursionError) as error:
         print(f"enkel: {error}", file=sys.stderr)

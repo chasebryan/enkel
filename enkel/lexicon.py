@@ -4,7 +4,7 @@ import hashlib
 import json
 
 ROLES = ("se", "ob", "to", "vi", "at", "on")
-VERSION = "0.1.0"
+VERSION = "0.2.0"
 
 
 @dataclass(frozen=True)
@@ -26,6 +26,9 @@ class Verb:
 
 
 NOUNS = {
+    "world": Noun("world", "worlds"),
+    "speaker": Noun("speaker", "speakers", human=True),
+    "listener": Noun("listener", "listeners", human=True),
     "cat": Noun("cat", "cats"),
     "dog": Noun("dog", "dogs"),
     "child": Noun("child", "children", human=True),
@@ -62,6 +65,7 @@ def _v(third, past, participle, progressive, required=("se",), objects=()):
 
 
 VERBS = {
+    "greet": _v("greets", "greeted", "greeted", "greeting", ("se", "ob"), ("ob",)),
     "eat": _v("eats", "ate", "eaten", "eating", objects=("ob",)),
     "see": _v("sees", "saw", "seen", "seeing", ("se", "ob"), ("ob",)),
     "hold": _v("holds", "held", "held", "holding", ("se", "ob"), ("ob",)),

@@ -18,4 +18,6 @@ def compile_sentence(source, context=None):
             "meaning": tree, "english": render(tree), "logic": logic(tree)}
 
 
-__all__ = ["Context", "ContextError", "EnkelError", "compile_sentence", "parse", "serialize"]
+from .english import EnglishError, translate_english
+
+__all__ = ["Context", "ContextError", "EnkelError", "EnglishError", "compile_sentence", "translate_english", "parse", "serialize"]
