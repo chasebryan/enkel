@@ -10,6 +10,8 @@ NAME = re.compile(r"re-[A-Z][A-Za-z0-9_]*\Z")
 BACKREF = re.compile(r"re(?:-([1-9][0-9]*))?\Z")
 MAX_TOKENS = 2048
 MAX_DEPTH = 24
+MAX_SOURCE = 65536
+MAX_NEGATIONS = 128
 
 
 class EnkelError(ValueError):
@@ -75,8 +77,12 @@ class Parser:
         if not isinstance(source, str):
             raise TypeError("source must be a string")
         self.source, self.tokens, self.i = source, [], 0
+        if len(source) > MAX_SOURCE:
+            self.fail(f"Sentence exceeds the {MAX_SOURCE}-character implementation limit.", 0)
         end = 0
         for match in TOKEN.finditer(source):
+            if len(match.group()) > 128:
+                self.fail("A token may contain at most 128 characters.", match.start())
             gap = source[end:match.start()]
             if gap and not gap.isspace():
                 self.fail("Unsupported character; Core uses ASCII word tokens, spaces, and final . or ?.", end)
@@ -88,6 +94,8 @@ class Parser:
             self.fail("Unsupported character.", end)
         if len(self.tokens) > MAX_TOKENS:
             self.fail(f"Sentence exceeds the {MAX_TOKENS}-token implementation limit.")
+        if sum(token == "ne" for token, _ in self.tokens) > MAX_NEGATIONS:
+            self.fail(f"Sentence exceeds the {MAX_NEGATIONS} explicit-negation implementation limit.")
 
     def fail(self, message, offset=None):
         if offset is None:

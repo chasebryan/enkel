@@ -1,0 +1,37 @@
+(* Enkel Core 0.1.0. Quoted strings are literal tokens, except the concatenated
+   morphology productions explicitly identified below. Whitespace separates
+   word tokens. A final punctuation token may touch the previous token.
+   Lexicon membership, role frames, binding, and limits are additional static
+   well-formedness conditions specified in SPEC.md. *)
+
+sentence       = declarative | polar-question | role-question ;
+declarative    = clause, [ "." ] ;
+polar-question = "ka", clause, [ "?" ] ;
+role-question  = query-role, clause, [ "?" ] ;
+query-role     = "ka-se" | "ka-ob" | "ka-to" | "ka-vi" | "ka-at" | "ka-on" ;
+
+clause         = verb-token, { item } ;
+item           = role, nominal | "ne" ;
+role           = "se" | "ob" | "to" | "vi" | "at" | "on" ;
+nominal        = determined | reference | back-reference | kind ;
+determined     = noun-token, { adjective-token }, { relative } ;
+relative       = "ke", clause, "ek" ;
+reference      = "me" | "yu" | "we" | named-reference ;
+kind           = noun-root ;
+
+(* The following productions concatenate characters into ONE word token. *)
+verb-token     = [ "no-" ], tense, "-", verb-root, [ "-en" ], [ "-ing" ] ;
+tense          = "di" | "du" | "wi" ;
+noun-token     = count-noun-root, "-", determiner
+               | "no-", count-noun-root, "-a" ;
+determiner     = "a" | "e" | "i" | "o" | "u" ;
+adjective-token = "ma-", adjective-root ;
+named-reference = "re-", entity-id ;
+back-reference = "re" | "re-", positive-decimal ;
+entity-id      = uppercase, { letter | digit | "_" } ;
+positive-decimal = nonzero-digit, { digit } ;
+
+(* noun-root, count-noun-root, verb-root, and adjective-root are FINITE sets
+   defined by enkel/lexicon.py, not arbitrary English words. Roots are lowercase
+   ASCII letters. entity-id uses ASCII letters and digits. Decimal back-reference
+   1 normalizes to bare re. Neither 0 nor a leading zero is valid. *)

@@ -17,7 +17,7 @@ def term_text(term, subject=False):
     return label + " [@" + term["id"] + "]"
 
 
-def verb_text(verb, subject):
+def _inflect(verb, subject):
     forms = VERBS[verb["root"]]
     tense, perfect, progressive = verb["tense"], verb["perfect"], verb["progressive"]
     third_singular = subject["number"] == "singular" and subject["person"] == 3
@@ -33,6 +33,24 @@ def verb_text(verb, subject):
             auxiliary = "is" if third_singular else "am" if subject["number"] == "singular" and subject["person"] == 1 else "are"
         return auxiliary + " " + forms.progressive
     return "will " + verb["root"] if tense == "wi" else forms.past if tense == "di" else forms.third if third_singular else verb["root"]
+
+
+def verb_text(verb, subject):
+    text = _inflect(verb, subject)
+    current = (verb["tense"], verb["perfect"], verb["progressive"])
+    # English orthography can collapse distinct tenses: "I read"/"I read".
+    # Preserve that distinction instead of relying on an imagined pronunciation.
+    for tense in ("di", "du", "wi"):
+        for perfect in (False, True):
+            for progressive in (False, True):
+                if (tense, perfect, progressive) == current:
+                    continue
+                other = {"root": verb["root"], "tense": tense, "perfect": perfect, "progressive": progressive}
+                if _inflect(other, subject) == text:
+                    tense_name = {"di": "past", "du": "present", "wi": "future"}[verb["tense"]]
+                    aspect = "perfect progressive" if verb["perfect"] and verb["progressive"] else "perfect" if verb["perfect"] else "progressive" if verb["progressive"] else "simple"
+                    return f"{text} ({tense_name} tense, {aspect} aspect)"
+    return text
 
 
 def body_text(node):
@@ -70,7 +88,7 @@ def body_text(node):
     elif q == "exists_plural":
         frame = f"there are at least two {description}, collectively designated {variable}{relative}, such that"
     else:
-        frame = f"for the maximal plurality {variable} of at least two {description}{relative},"
+        frame = f"for the unique greatest plurality {variable} by membership inclusion, of at least two {description}{relative},"
     return frame + " (" + body_text(node["body"]) + ")"
 
 

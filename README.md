@@ -22,6 +22,7 @@ python3 -m enkel 'du-eat ob cookie-a se child-u' --format logic
 python3 -m enkel 'ka-ob wi-eat se cat-e' --format json
 python3 -m enkel --file examples/sentences.enk --context examples/context.json
 python3 -m enkel --lexicon
+python3 -m unittest discover -s tests -v
 ```
 
 ```text
@@ -76,8 +77,12 @@ real-world truth, or resolve the philosophical meanings of its English roots.
 The formal guarantee concerns a unique scoped structure under the pinned
 grammar, vocabulary, and context.
 
-The complete grammar, specification, and semantic regression suite are being
-added in the following implementation checkpoints.
+Read the [complete specification](docs/SPEC.md) for the scoping algorithm,
+reference rules, plural semantics, canonical rendering procedure, and an
+informal uniqueness argument. The [EBNF grammar](docs/grammar.ebnf) gives the
+syntax. The [test suite](tests/test_core.py) checks all original examples,
+scope counterexamples in finite worlds, relative binding, reference identity,
+English agreement, invalid forms, and 120 generated normalization round trips.
 
 ## License
 
