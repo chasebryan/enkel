@@ -1,4 +1,4 @@
-(* Enkel Core 0.1.0. Quoted strings are literal tokens, except the concatenated
+(* Enkel Core 0.2.0. Quoted strings are literal tokens, except the concatenated
    morphology productions explicitly identified below. Whitespace separates
    word tokens. A final punctuation token may touch the previous token.
    Lexicon membership, role frames, binding, and limits are additional static

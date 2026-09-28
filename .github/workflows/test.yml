@@ -30,4 +30,6 @@ jobs:
         working-directory: ${{ runner.temp }}
         run: |
           enkel --version
+          enkel 'hello world'
+          enkel --from english 'The cat eats a cookie.'
           enkel 'du-eat se child-u ob cookie-a'

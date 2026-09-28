@@ -1,4 +1,4 @@
-"""Predictive parser for Enkel Core 0.1. No ambiguity resolution heuristics."""
+"""Predictive parser for Enkel Core 0.2. No ambiguity resolution heuristics."""
 from dataclasses import asdict, dataclass
 import re
 from .lexicon import ADJECTIVES, NOUNS, ROLES, VERBS
@@ -176,7 +176,7 @@ class Parser:
             if negative and det != "a":
                 self.fail("Nominal no- is defined only for -a: no-cat-a.")
             if not NOUNS[root].count:
-                self.fail("Mass nouns are kind terms in Core 0.1; use the bare root.")
+                self.fail("Mass nouns are kind terms in Core 0.2; use the bare root.")
             self.take()
             adjectives, relatives = [], []
             while self.peek() and self.peek().startswith("ma-"):

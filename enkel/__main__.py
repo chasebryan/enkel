@@ -9,7 +9,7 @@ from .english import looks_like_enkel, translate_english
 
 
 def main(argv=None):
-    parser = argparse.ArgumentParser(description="Translate English to Enkel, or compile Enkel to scoped English.")
+    parser = argparse.ArgumentParser(prog="enkel", description="Translate English to Enkel, or compile Enkel to scoped English.")
     parser.add_argument("sentence", nargs="?", help="one quoted English or Enkel sentence; stdin if omitted")
     parser.add_argument("--from", dest="input_language", choices=("auto", "english", "enkel"), default="auto", help="input language; auto recognizes Enkel clause prefixes, otherwise English")
     parser.add_argument("--file", type=Path, help="UTF-8 file: one sentence per nonblank, non-comment line")

@@ -1,4 +1,4 @@
-# Enkel Core 0.1.0
+# Enkel Core 0.2.0
 
 **A sentence states its structure. The renderer follows it.**
 
@@ -24,8 +24,11 @@ Enkel cannot decide whether that interpretation is true of the actual world.
 
 The English output is a controlled notation: explicit binder labels,
 parentheses, quoted reference labels, and prescribed scope frames are part of
-the output. The JSON scope tree is the machine interface. This release has no
-English-to-Enkel translator and no inverse English parser.
+the output. The JSON scope tree is the machine interface. A separate
+[English input layer](ENGLISH.md) maps a supported English subset into Core,
+then validates it with this compiler. Its interpretation conventions are
+separate from Core's structural guarantee. There is no inverse parser for
+the labeled canonical-English notation.
 
 Different source spellings can have the same meaning. In particular, `re-1`
 and `re` normalize together, and nominal negation has an explicit equivalent.
@@ -41,7 +44,7 @@ optional and is removed by source normalization. Internal punctuation and
 unrecognized characters are errors. The CLI file mode reads one sentence per
 nonblank line and ignores lines beginning with `#` after indentation.
 
-The pinned vocabulary contains 27 noun roots, 22 verb roots, and 18 adjective
+The pinned vocabulary contains 30 noun roots, 23 verb roots, and 18 adjective
 roots. Run `python3 -m enkel --lexicon` for the complete inventory, English
 forms, and verb role frames. Roots are not inferred from spelling. Adding a
 root requires an explicit lexicon change and a new lexicon fingerprint.
@@ -111,7 +114,7 @@ Nominal `no-` is supported only with `-a`. Forms such as `no-cat-u` are
 rejected, since their intended scope would otherwise need another rule.
 Write the desired universal and `ne` placement instead.
 
-Mass roots (`water`, `music`) are kind terms only in 0.1. Neither `water-a`
+Mass roots (`water`, `music`) are kind terms only in 0.2. Neither `water-a`
 nor `water-e` is implemented. Amounts, portions, and mass quantification need
 their own future design. Bare count roots are also kind terms; `cat` does not
 mean "every cat" or "most cats."
@@ -400,7 +403,7 @@ relatives.
 The wh operator is outside all local binders. Thus
 `ka-ob du-eat se child-u` asks for objects that every child eats, rather than a
 separate possibly different answer for each child. Answers range over one
-individual at a time in Core 0.1; no plural-answer coercion or pair-list
+individual at a time in Core 0.2; no plural-answer coercion or pair-list
 reading is inferred. A question's truth or answer set is undefined when its
 required body interpretation is undefined.
 
@@ -472,7 +475,7 @@ formal verification of the Python runtime or an exhaustive proof of all code.
 
 ## 14. Explicit exclusions and compatibility
 
-Core 0.1 excludes coordination, disjunction, conditionals, modals, comparative
+The Core 0.2 grammar excludes coordination, disjunction, conditionals, modals, comparative
 adjectives, proper nouns outside declared references, unrestricted adverbs,
 complement clauses, quotation, dynamic discourse binding, mass amounts,
 multiple overt phrases with the same role, and arbitrary English input.

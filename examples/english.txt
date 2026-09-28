@@ -1,0 +1,10 @@
+# Plain English input; each line translates without a scope flag.
+hello world
+The cat eats a cookie.
+A dog chased the cat.
+The small black cat sleeps.
+The teacher gives the child a book.
+I have been eating an apple.
+What will the cat eat?
+Does the cat eat a cookie?
+Not every child eats a cookie.

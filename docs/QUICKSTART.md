@@ -1,4 +1,24 @@
-# Write your first Enkel sentences
+# Translate English or write Enkel
+
+Start with ordinary English:
+
+```sh
+python3 -m enkel "hello world"
+```
+
+```text
+du-greet se speaker-e ob world-e
+```
+
+The greeting has a fixed paraphrase: the speaker greets the world. Statements
+such as `The cat eats a cookie` and questions such as `What will the cat eat?`
+also translate directly. See [the English input guide](ENGLISH.md) for its
+supported grammar, context handling, and explicit ambiguity choices.
+
+Input beginning with an Enkel tense or question prefix continues to compile
+to English automatically. Use `--from english` or `--from enkel` to select
+the input language yourself. The examples below show that Core compilation
+direction, including how to write scope directly.
 
 Run the examples from the repository root with Python 3.10 or newer. Nothing
 needs to be installed to use `python3 -m enkel`.
