@@ -1,0 +1,12 @@
+{
+  "entities": {
+    "Speaker": {"label": "the speaker", "number": "singular"},
+    "Reader": {"label": "the addressee", "number": "singular"},
+    "Team": {"label": "the speaker and the addressee", "number": "plural", "members": ["Speaker", "Reader"]},
+    "John": {"label": "John", "number": "singular"},
+    "OtherJohn": {"label": "John", "number": "singular"}
+  },
+  "speaker": "Speaker",
+  "addressee": "Reader",
+  "group": "Team"
+}

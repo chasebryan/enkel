@@ -1,0 +1,23 @@
+# Original examples; named and deictic references require context.json.
+du-eat se child-u ob cookie-a
+du-eat ob cookie-a se child-u
+di-see se me ob man-e vi telescope-e
+di-see se me ob man-e ke di-hold se re ob telescope-e ek
+ka-ob wi-eat se cat-e
+# Scope survives canonical role reordering.
+du-give se teacher-u to child-u ob book-a
+du-give se teacher-u ob book-a to child-u
+# Three different placements of negation.
+no-du-eat se child-u ob cookie-a
+du-eat se child-u ne ob cookie-a
+du-eat ne se child-u ob cookie-a
+# Noun negation, aspect, modifiers, pluralities, and kinds.
+du-eat se child-u ob no-cookie-a
+du-eat-en-ing se me ob apple-a
+du-sleep se cat-a ma-small ma-black
+du-sleep se cat-i
+du-sleep se cat-o
+du-flow se water
+ka di-see se re-John ob re-OtherJohn
+# The innermost relative can explicitly address an outer head.
+di-see se me ob man-a ke di-see se re ob woman-a ke di-help se re ob re-2 ek ek
