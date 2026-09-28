@@ -19,6 +19,17 @@ class Entity:
 
 
 class Context:
+    @classmethod
+    def from_json(cls, text):
+        def unique_object(pairs):
+            result = {}
+            for key, value in pairs:
+                if key in result:
+                    raise ContextError(f"Duplicate JSON key {key!r}; context declarations cannot be overwritten.")
+                result[key] = value
+            return result
+        return cls(json.loads(text, object_pairs_hook=unique_object))
+
     def __init__(self, data=None):
         data = {} if data is None else data
         if not isinstance(data, dict) or set(data) - {"entities", "speaker", "addressee", "group"}:

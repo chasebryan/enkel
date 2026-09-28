@@ -211,6 +211,13 @@ class ReferenceTests(unittest.TestCase):
         reordered = dict(reversed(list(CONTEXT.items())))
         self.assertEqual(Context(CONTEXT).digest(), Context(reordered).digest())
 
+    def test_json_context_rejects_duplicate_ids_and_fields(self):
+        for source in ('{"speaker":"John","speaker":"OtherJohn"}',
+                       '{"entities":{"John":{"label":"John"},"John":{"label":"Other"}}}',
+                       '{"entities":{"John":{"label":"John","label":"Other"}}}'):
+            with self.subTest(source=source), self.assertRaises(ContextError):
+                Context.from_json(source)
+
     def test_quoted_display_labels_cannot_inject_scope(self):
         context = {"entities": {"A": {"label": 'John) such that ("'}}}
         output = compiled("du-sleep se re-A", context)["english"]

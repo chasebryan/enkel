@@ -11,6 +11,9 @@ This is **Enkel Core 0.1.0**, an executable, deliberately bounded prototype.
 The canonical rendering uses parentheses and bound-variable labels so English
 word order cannot silently erase a distinction made in Enkel.
 
+Start with the [usage guide](docs/QUICKSTART.md), then inspect the
+[formal specification](docs/SPEC.md) and [validation notes](docs/VALIDATION.md).
+
 ## Run
 
 Python 3.10 or newer. No runtime dependencies or network access required.

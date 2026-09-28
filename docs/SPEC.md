@@ -230,7 +230,11 @@ references. This keeps the two mechanisms syntactically disjoint.
 entity cannot list members. A plural entity needs at least two distinct,
 declared singular members. The `group` binding must be plural and include the
 declared singular speaker. The addressee can be singular or an explicit
-plurality. No binding is supplied implicitly.
+plurality. No binding is supplied implicitly. `Context.from_json` and the CLI
+reject duplicate JSON keys at every level, including repeated entity IDs;
+a later declaration cannot silently overwrite an earlier one. API callers
+supplying an already-decoded dictionary are responsible for preserving that
+same input condition.
 
 Display labels are never identity keys. The renderer JSON-quotes named labels
 and retains `[@ID]`, so two entities both labeled John remain distinguishable.

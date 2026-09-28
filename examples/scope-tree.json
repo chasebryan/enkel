@@ -1,0 +1,139 @@
+{
+  "context_sha256": "4d64b9421e5ae094d1b63ddc189abbd66f6e7d7375984105084d89c9eb77491c",
+  "english": "For every teacher [x1], (for every child [x2], (there is a book [x3] such that ([x1] gives [x3], with recipient [x2]))).",
+  "lexicon_sha256": "415dcc094204fc5ffda565ed30f59b06afab8cb84879a887219ff22d88137dd8",
+  "logic": "EVERY x1:(teacher). (EVERY x2:(child). (EXISTS x3:(book). (du-give(se=x1, ob=x3, to=x2))))",
+  "meaning": {
+    "body": {
+      "body": {
+        "body": {
+          "body": {
+            "roles": {
+              "ob": {
+                "name": "x3",
+                "number": "singular",
+                "person": 3,
+                "type": "variable"
+              },
+              "se": {
+                "name": "x1",
+                "number": "singular",
+                "person": 3,
+                "type": "variable"
+              },
+              "to": {
+                "name": "x2",
+                "number": "singular",
+                "person": 3,
+                "type": "variable"
+              }
+            },
+            "type": "predicate",
+            "verb": {
+              "perfect": false,
+              "progressive": false,
+              "root": "give",
+              "tense": "du"
+            }
+          },
+          "quantifier": "exists",
+          "restriction": {
+            "adjectives": [],
+            "noun": "book",
+            "relatives": []
+          },
+          "type": "bind",
+          "variable": {
+            "name": "x3",
+            "number": "singular",
+            "person": 3,
+            "type": "variable"
+          }
+        },
+        "quantifier": "every",
+        "restriction": {
+          "adjectives": [],
+          "noun": "child",
+          "relatives": []
+        },
+        "type": "bind",
+        "variable": {
+          "name": "x2",
+          "number": "singular",
+          "person": 3,
+          "type": "variable"
+        }
+      },
+      "quantifier": "every",
+      "restriction": {
+        "adjectives": [],
+        "noun": "teacher",
+        "relatives": []
+      },
+      "type": "bind",
+      "variable": {
+        "name": "x1",
+        "number": "singular",
+        "person": 3,
+        "type": "variable"
+      }
+    },
+    "type": "statement"
+  },
+  "normalized": "du-give se teacher-u to child-u ob book-a",
+  "syntax": {
+    "clause": {
+      "items": [
+        {
+          "nominal": {
+            "adjectives": [],
+            "depth": 0,
+            "determiner": "u",
+            "kind": "noun",
+            "negative": false,
+            "offset": 11,
+            "relatives": [],
+            "value": "teacher"
+          },
+          "role": "se"
+        },
+        {
+          "nominal": {
+            "adjectives": [],
+            "depth": 0,
+            "determiner": "u",
+            "kind": "noun",
+            "negative": false,
+            "offset": 24,
+            "relatives": [],
+            "value": "child"
+          },
+          "role": "to"
+        },
+        {
+          "nominal": {
+            "adjectives": [],
+            "depth": 0,
+            "determiner": "a",
+            "kind": "noun",
+            "negative": false,
+            "offset": 35,
+            "relatives": [],
+            "value": "book"
+          },
+          "role": "ob"
+        }
+      ],
+      "verb": {
+        "negative": false,
+        "perfect": false,
+        "progressive": false,
+        "root": "give",
+        "tense": "du"
+      }
+    },
+    "mode": "statement",
+    "query_role": null
+  },
+  "version": "0.1.0"
+}

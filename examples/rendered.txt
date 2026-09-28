@@ -1,0 +1,53 @@
+du-eat se child-u ob cookie-a
+For every child [x1], (there is a cookie [x2] such that ([x1] eats [x2])).
+
+du-eat ob cookie-a se child-u
+There is a cookie [x1] such that (for every child [x2], ([x2] eats [x1])).
+
+di-see se me ob man-e vi telescope-e
+For the unique man [x1], (for the unique telescope [x2], (I [@Speaker] saw [x1], using instrument [x2])).
+
+di-see se me ob man-e ke di-hold se re ob telescope-e ek
+For the unique man [x1] satisfying (for the unique telescope [x2], ([x1] held [x2])), (I [@Speaker] saw [x1]).
+
+ka-ob wi-eat se cat-e
+Which object [q0] makes the following true: (for the unique cat [x1], ([x1] will eat [q0]))?
+
+du-give se teacher-u to child-u ob book-a
+For every teacher [x1], (for every child [x2], (there is a book [x3] such that ([x1] gives [x3], with recipient [x2]))).
+
+du-give se teacher-u ob book-a to child-u
+For every teacher [x1], (there is a book [x2] such that (for every child [x3], ([x1] gives [x2], with recipient [x3]))).
+
+no-du-eat se child-u ob cookie-a
+For every child [x1], (there is a cookie [x2] such that (it is not the case that ([x1] eats [x2]))).
+
+du-eat se child-u ne ob cookie-a
+For every child [x1], (it is not the case that (there is a cookie [x2] such that ([x1] eats [x2]))).
+
+du-eat ne se child-u ob cookie-a
+It is not the case that (for every child [x1], (there is a cookie [x2] such that ([x1] eats [x2]))).
+
+du-eat se child-u ob no-cookie-a
+For every child [x1], (it is not the case that (there is a cookie [x2] such that ([x1] eats [x2]))).
+
+du-eat-en-ing se me ob apple-a
+There is an apple [x1] such that (I [@Speaker] have been eating [x1]).
+
+du-sleep se cat-a ma-small ma-black
+There is a small black cat [x1] such that ([x1] sleeps).
+
+du-sleep se cat-i
+There are at least two cats, collectively designated [x1], such that ([x1] sleep).
+
+du-sleep se cat-o
+For the unique greatest plurality [x1] by membership inclusion, of at least two cats, ([x1] sleep).
+
+du-flow se water
+The kind "water" flows.
+
+ka di-see se re-John ob re-OtherJohn
+Is it the case that ("John" [@John] saw "John" [@OtherJohn])?
+
+di-see se me ob man-a ke di-see se re ob woman-a ke di-help se re ob re-2 ek ek
+There is a man [x1] satisfying (there is a woman [x2] satisfying ([x2] helped [x1]) such that ([x1] saw [x2])) such that (I [@Speaker] saw [x1]).

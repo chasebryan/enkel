@@ -22,7 +22,7 @@ def main(argv=None):
         print(json.dumps(description(), indent=2, sort_keys=True))
         return 0
     try:
-        context = Context(json.loads(args.context.read_text(encoding="utf-8"))) if args.context else Context()
+        context = Context.from_json(args.context.read_text(encoding="utf-8")) if args.context else Context()
         if args.file:
             sources = [(i, line.strip()) for i, line in enumerate(args.file.read_text(encoding="utf-8").splitlines(), 1)
                        if line.strip() and not line.lstrip().startswith("#")]
